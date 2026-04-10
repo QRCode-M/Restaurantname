@@ -1,37 +1,22 @@
 :root {
-  --bg: #120d0a;
-  --panel: rgba(32, 23, 18, 0.88);
-  --panel-border: rgba(255, 191, 104, 0.26);
-  --text: #f7f0e7;
-  --muted: #d8c3ae;
-  --accent: #ff9f43;
-  --accent-strong: #ffbf68;
-  --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
-  --radius-xl: 28px;
-  --radius-lg: 22px;
-  --radius-md: 16px;
+  --bg: #000;
+  --panel: rgba(0, 0, 0, 0.94);
+  --line: rgba(255, 255, 255, 0.12);
+  --text: #fff;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+html,
 body {
   margin: 0;
-  min-height: 100vh;
-  color: var(--text);
-  font-family: "Noto Kufi Arabic", sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(255, 159, 67, 0.18), transparent 30%),
-    radial-gradient(circle at bottom left, rgba(255, 191, 104, 0.12), transparent 35%),
-    linear-gradient(180deg, #231611 0%, #120d0a 55%, #0b0908 100%);
+  min-height: 100%;
+  background: var(--bg);
 }
 
-body.no-scroll {
+body.viewer-open {
   overflow: hidden;
 }
 
@@ -44,257 +29,101 @@ button {
   font: inherit;
 }
 
-.page-shell {
-  width: min(1120px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 28px 0 56px;
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 26px;
-  padding: 28px;
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-xl);
-  background:
-    linear-gradient(135deg, rgba(255, 159, 67, 0.16), rgba(255, 159, 67, 0.02)),
-    var(--panel);
-  box-shadow: var(--shadow);
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: auto -45px -45px auto;
-  width: 190px;
-  height: 190px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 191, 104, 0.14), transparent 65%);
-  pointer-events: none;
-}
-
-.eyebrow,
-.menu-card__tag,
-.lightbox__eyebrow {
-  margin: 0 0 10px;
-  color: var(--accent-strong);
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hero h1,
-.menu-card h2,
-.lightbox h2 {
-  margin: 0;
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  line-height: 1.12;
-}
-
-.hero h1 {
-  font-size: clamp(2.25rem, 5vw, 4rem);
-}
-
-.hero-copy,
-.menu-card p {
-  margin: 14px 0 0;
-  color: var(--muted);
-  line-height: 1.9;
-}
-
 .gallery {
   display: grid;
-  gap: 22px;
-}
-
-.menu-card {
-  display: grid;
-  gap: 18px;
-  align-items: center;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  padding: 20px;
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-xl);
-  background: var(--panel);
-  box-shadow: var(--shadow);
-}
-
-.menu-card__meta {
-  padding: 8px;
-}
-
-.menu-card__button {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  cursor: zoom-in;
-  border: 0;
-  border-radius: var(--radius-lg);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: min(1500px, 100%);
+  margin: 0 auto;
+  padding: 12px;
   background: #000;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.45);
 }
 
-.menu-card__button img {
+.menu-thumb {
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: zoom-in;
+}
+
+.menu-thumb img {
   width: 100%;
-  transition: transform 220ms ease, opacity 220ms ease;
+  height: auto;
 }
 
-.menu-card__button:hover img,
-.menu-card__button:focus-visible img {
-  transform: scale(1.02);
-  opacity: 0.92;
-}
-
-.menu-card__button:focus-visible {
-  outline: 3px solid rgba(255, 191, 104, 0.55);
-  outline-offset: 4px;
-}
-
-.menu-card__hint {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  padding: 9px 14px;
-  border: 1px solid rgba(255, 191, 104, 0.38);
-  border-radius: 999px;
-  color: var(--text);
-  background: rgba(18, 13, 10, 0.8);
-  font-size: 0.88rem;
-}
-
-.lightbox {
+.viewer {
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: 100;
   display: none;
 }
 
-.lightbox.is-open {
+.viewer.is-open {
   display: block;
 }
 
-.lightbox__backdrop {
+.viewer__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(3, 2, 2, 0.82);
-  backdrop-filter: blur(8px);
+  border: 0;
+  background: rgba(0, 0, 0, 0.92);
 }
 
-.lightbox__panel {
+.viewer__panel {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  width: min(1220px, calc(100% - 20px));
-  height: min(92vh, 980px);
-  margin: 4vh auto;
-  border: 1px solid rgba(255, 191, 104, 0.2);
-  border-radius: calc(var(--radius-xl) + 4px);
-  background: rgba(14, 10, 8, 0.92);
-  box-shadow: var(--shadow);
+  width: 100%;
+  height: 100%;
 }
 
-.lightbox__toolbar {
+.viewer__toolbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px;
-  border-bottom: 1px solid rgba(255, 191, 104, 0.16);
+  gap: 8px;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.72);
+  border-bottom: 1px solid var(--line);
 }
 
-.lightbox__controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.lightbox__control,
-.lightbox__close {
+.viewer__btn {
   min-width: 56px;
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 191, 104, 0.28);
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--panel);
 }
 
-.lightbox__close {
-  background: rgba(255, 159, 67, 0.14);
+.viewer__btn--close {
+  min-width: 64px;
 }
 
-.lightbox__viewport {
+.viewer__viewport {
   overflow: auto;
-  padding: 18px;
+  padding: 12px;
   touch-action: pan-x pan-y;
 }
 
-.lightbox__viewport img {
+.viewer__viewport img {
   width: 100%;
   max-width: none;
+  height: auto;
   margin: 0 auto;
   transform-origin: top center;
-  transition: transform 180ms ease;
-  will-change: transform;
+  transition: transform 0.15s ease;
 }
 
-@media (max-width: 860px) {
-  .page-shell {
-    width: min(100% - 18px, 1120px);
-    padding-top: 14px;
-  }
-
-  .hero,
-  .menu-card {
-    padding: 16px;
-  }
-
-  .menu-card {
+@media (max-width: 900px) {
+  .gallery {
     grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 8px;
   }
 
-  .lightbox__panel {
-    width: calc(100% - 10px);
-    height: 95vh;
-    margin: 2.5vh auto;
-  }
-
-  .lightbox__toolbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 520px) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-
-  .hero-copy,
-  .menu-card p {
-    font-size: 0.93rem;
-    line-height: 1.85;
-  }
-
-  .menu-card__hint {
-    right: 10px;
-    bottom: 10px;
-    padding: 8px 12px;
-    font-size: 0.78rem;
-  }
-
-  .lightbox__controls {
-    width: 100%;
-  }
-
-  .lightbox__control,
-  .lightbox__close {
-    flex: 1 1 78px;
-  }
-
-  .lightbox__viewport {
-    padding: 12px;
+  .viewer__viewport {
+    padding: 8px;
   }
 }

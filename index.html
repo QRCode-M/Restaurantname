@@ -3,77 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
-  <title>قائمة المطعم</title>
-  <meta name="description" content="صفحة بسيطة لعرض قائمة المطعم بشكل واضح على الجوال مع إمكانية التكبير.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Menu</title>
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <main class="page-shell">
-    <section class="hero">
-      <p class="eyebrow">Menu Preview</p>
-      <h1>قائمة المطعم</h1>
-      <p class="hero-copy">
-        الصفحة مناسبة للعرض على الجوال. اضغط على أي صورة لفتحها بحجم أكبر، ثم استخدم أزرار
-        <span dir="ltr">+</span>
-        و
-        <span dir="ltr">-</span>
-        للتكبير والتصغير.
-      </p>
-    </section>
+  <main class="gallery">
+    <button class="menu-thumb" type="button" data-image="./menu-01.jpg" aria-label="فتح صورة المنيو الأولى">
+      <img src="./menu-01.jpg" alt="المنيو 1">
+    </button>
 
-    <section class="gallery" aria-label="صور القائمة">
-      <article class="menu-card">
-        <div class="menu-card__meta">
-          <p class="menu-card__tag">الصفحة الأولى</p>
-          <h2>الشوربة والسلطات</h2>
-          <p>عرض كامل يناسب القراءة السريعة على الهاتف.</p>
-        </div>
-        <button class="menu-card__button js-open-lightbox" type="button" data-image="assets/menu-01.jpg" data-title="الشوربة والسلطات">
-          <img src="assets/menu-01.jpg" alt="صفحة القائمة الخاصة بالشوربة والسلطات">
-          <span class="menu-card__hint">اضغط للتكبير</span>
-        </button>
-      </article>
-
-      <article class="menu-card">
-        <div class="menu-card__meta">
-          <p class="menu-card__tag">الصفحة الثانية</p>
-          <h2>الخضار والأطباق الرئيسية</h2>
-          <p>مناسبة للعرض داخل GitHub Pages ويمكن تطويرها لاحقًا إلى قائمة برمجية كاملة.</p>
-        </div>
-        <button class="menu-card__button js-open-lightbox" type="button" data-image="assets/menu-02.jpg" data-title="الخضار والأطباق الرئيسية">
-          <img src="assets/menu-02.jpg" alt="صفحة القائمة الخاصة بالخضار والأطباق الرئيسية">
-          <span class="menu-card__hint">اضغط للتكبير</span>
-        </button>
-      </article>
-    </section>
+    <button class="menu-thumb" type="button" data-image="./menu-02.jpg" aria-label="فتح صورة المنيو الثانية">
+      <img src="./menu-02.jpg" alt="المنيو 2">
+    </button>
   </main>
 
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightbox__backdrop" data-close-lightbox></div>
-    <section class="lightbox__panel" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
-      <header class="lightbox__toolbar">
-        <div>
-          <p class="lightbox__eyebrow">عرض مكبر</p>
-          <h2 id="lightbox-title">القائمة</h2>
-        </div>
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <button class="viewer__backdrop" id="viewer-backdrop" type="button" aria-label="إغلاق"></button>
 
-        <div class="lightbox__controls">
-          <button class="lightbox__control" id="zoom-in" type="button" aria-label="تكبير الصورة">+</button>
-          <button class="lightbox__control" id="zoom-out" type="button" aria-label="تصغير الصورة">-</button>
-          <button class="lightbox__control" id="zoom-reset" type="button">100%</button>
-          <button class="lightbox__close" id="close-lightbox" type="button">إغلاق</button>
-        </div>
-      </header>
-
-      <div class="lightbox__viewport" id="lightbox-viewport">
-        <img id="lightbox-image" src="" alt="">
+    <div class="viewer__panel">
+      <div class="viewer__toolbar">
+        <button class="viewer__btn" id="zoom-in" type="button" aria-label="تكبير">+</button>
+        <button class="viewer__btn" id="zoom-out" type="button" aria-label="تصغير">-</button>
+        <button class="viewer__btn" id="zoom-reset" type="button" aria-label="إعادة الحجم">100%</button>
+        <button class="viewer__btn viewer__btn--close" id="close-viewer" type="button" aria-label="إغلاق">×</button>
       </div>
-    </section>
+
+      <div class="viewer__viewport" id="viewer-viewport">
+        <img id="viewer-image" src="" alt="">
+      </div>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
